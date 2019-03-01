@@ -1,17 +1,24 @@
 import React, { Component } from "react";
 import Galleryitem from "./galleryitem";
+import Notfound from "./notfound";
 
 const Gallery = props => {
   const results = props.data;
 
-  const gallerylist = results.map(result => (
-    <Galleryitem
-      url={`https://farm${result.farm}.staticflickr.com/${result.server}/${
-        result.id
-      }_${result.secret}.jpg`}
-      key={result.id}
-    />
-  ));
+  let gallerylist;
+
+  if (results.length > 0) {
+    gallerylist = results.map(result => (
+      <Galleryitem
+        url={`https://farm${result.farm}.staticflickr.com/${result.server}/${
+          result.id
+        }_${result.secret}.jpg`}
+        key={result.id}
+      />
+    ));
+  } else {
+    gallerylist = <Notfound />;
+  }
 
   return (
     <div className="photo-container">

@@ -1,17 +1,18 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-const Navigation = () => {
+const Navigation = props => {
   return (
     <nav className="main-nav">
       <ul>
         <li>
-          <a href="#">Cats</a>
+          <Link to="/cat" /*onClick={props.Click("cat")}*/>Cats</Link>
         </li>
         <li>
-          <a href="#">Dogs</a>
+          <Link to="/dog" /*onClick={props.onClick("dog")}*/>Dogs</Link>
         </li>
         <li>
-          <a href="#">Computers</a>
+          <Link to="/horse" /*onClick={props.onClick("Horse")}*/>Horses</Link>
         </li>
       </ul>
     </nav>
