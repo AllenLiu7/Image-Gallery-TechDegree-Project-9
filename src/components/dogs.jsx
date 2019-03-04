@@ -16,6 +16,7 @@ const Dogs = props => {
   return (
     <div className="photo-container">
       <h2>Results</h2>
+      <p>dogs</p>
       <ul>{gallerylist}</ul>
     </div>
   );

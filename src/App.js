@@ -6,7 +6,7 @@ import Searchform from "./components/searchform";
 import Navigation from "./components/nav";
 import Gallery from "./components/gallery";
 import Apikey from "./config";
-import Cats from "./components/horses";
+import Cats from "./components/cats";
 import Dogs from "./components/dogs";
 import Horses from "./components/horses";
 
@@ -43,7 +43,7 @@ class App extends Component {
       <Router>
         <div className="container">
           <Searchform onSearch={this.performSearch} />
-          <Navigation Click={this.performSearch} />
+          <Navigation />
           <Switch>
             <Route
               path="/"
@@ -59,15 +59,30 @@ class App extends Component {
             />
             <Route
               path="/cat"
-              render={props => <Cats data={this.state.galleryitems} />}
+              render={props => (
+                <Gallery
+                  data={this.state.galleryitems}
+                  search={this.performSearch}
+                />
+              )}
             />
             <Route
               path="/dog"
-              render={props => <Dogs data={this.state.galleryitems} />}
+              render={props => (
+                <Gallery
+                  data={this.state.galleryitems}
+                  search={this.performSearch}
+                />
+              )}
             />
             <Route
               path="/horse"
-              render={props => <Horses data={this.state.galleryitems} />}
+              render={props => (
+                <Gallery
+                  data={this.state.galleryitems}
+                  search={this.performSearch}
+                />
+              )}
             />
           </Switch>
         </div>
