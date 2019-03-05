@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 class Searchform extends Component {
   state = {
@@ -12,6 +14,7 @@ class Searchform extends Component {
   handleSummit = e => {
     e.preventDefault();
     this.props.onSearch(this.state.searchText);
+    this.props.history.push("/");
     e.currentTarget.reset();
   };
 
@@ -24,7 +27,7 @@ class Searchform extends Component {
           onChange={this.onSearchChange}
           required
         />
-        <button type="submit" className="search-button">
+        <button to="/" type="submit" className="search-button">
           <svg
             fill="#fff"
             height="24"
@@ -41,4 +44,4 @@ class Searchform extends Component {
   }
 }
 
-export default Searchform;
+export default withRouter(Searchform);

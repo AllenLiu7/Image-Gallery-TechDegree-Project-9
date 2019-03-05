@@ -6,10 +6,7 @@ import Searchform from "./components/searchform";
 import Navigation from "./components/nav";
 import Gallery from "./components/gallery";
 import Apikey from "./config";
-//import Gallerytest from "./components/gallerytest";
-import Cats from "./components/cats";
-import Dogs from "./components/dogs";
-import Horses from "./components/horses";
+import Notfound from "./components/notfound";
 
 class App extends Component {
   constructor() {
@@ -19,7 +16,8 @@ class App extends Component {
       cats: [],
       dogs: [],
       horses: [],
-      searchItem: []
+      searchItem: [],
+      loading: true
     };
   }
 
@@ -53,7 +51,7 @@ class App extends Component {
       .then(response => {
         this.setState({
           searchItem: response.data.photos.photo,
-          loading: true
+          loading: false
         });
       })
       .catch(error => {
@@ -71,27 +69,27 @@ class App extends Component {
             <Route
               path="/"
               exact
-              render={
-                () => <Gallery data={this.state.searchItem} />
-                // this.state.loading ? (
-                //   <Gallery data={this.state.galleryitems} />
-                // ) : (
-                //   <p>loading</p>
-                // )
+              render={() =>
+                this.state.loading ? (
+                  <p>loading</p>
+                ) : (
+                  <Gallery data={this.state.searchItem} />
+                )
               }
             />
             <Route
               path="/cat"
-              render={props => <Cats data={this.state.cats} />}
+              render={props => <Gallery data={this.state.cats} />}
             />
             <Route
               path="/dog"
-              render={props => <Dogs data={this.state.dogs} />}
+              render={props => <Gallery data={this.state.dogs} />}
             />
             <Route
               path="/horse"
-              render={props => <Horses data={this.state.horses} />}
+              render={props => <Gallery data={this.state.horses} />}
             />
+            <Route Component={<Notfound />} />
           </Switch>
         </div>
       </Router>
