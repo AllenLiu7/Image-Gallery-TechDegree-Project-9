@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Galleryitem from "./galleryitem";
 import Notfound from "./notfound";
 
@@ -7,6 +7,7 @@ const Gallery = props => {
 
   let gallerylist;
 
+  //creat the url to fetch the picture
   if (results.length > 0) {
     gallerylist = results.map(result => (
       <Galleryitem

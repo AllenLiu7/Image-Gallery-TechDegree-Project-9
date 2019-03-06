@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 class Searchform extends Component {
   state = {
@@ -27,7 +26,12 @@ class Searchform extends Component {
           onChange={this.onSearchChange}
           required
         />
-        <button to="/" type="submit" className="search-button">
+        <button
+          to="/"
+          type="submit"
+          className="search-button"
+          onClick={this.props.toggleLoading}
+        >
           <svg
             fill="#fff"
             height="24"

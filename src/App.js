@@ -6,7 +6,7 @@ import Searchform from "./components/searchform";
 import Navigation from "./components/nav";
 import Gallery from "./components/gallery";
 import Apikey from "./config";
-import Notfound from "./components/notfound";
+import PageNotfound from "./components/pagenotfound";
 
 class App extends Component {
   constructor() {
@@ -21,13 +21,7 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    this.search();
-    this.defaultSearch("cats");
-    this.defaultSearch("dogs");
-    this.defaultSearch("horses");
-  }
-
+  // fetch data for three default link.
   defaultSearch = tag => {
     axios
       .get(
@@ -43,6 +37,7 @@ class App extends Component {
       });
   };
 
+  //fetch data for searchitem
   search = (tag = "sunrise") => {
     axios
       .get(
@@ -59,16 +54,34 @@ class App extends Component {
       });
   };
 
+  //reset loading to true when form submited
+  toggleLoading = () => {
+    this.setState({
+      loading: true
+    });
+  };
+
+  //fetch data for four default page when app loads
+  componentDidMount() {
+    this.search();
+    this.defaultSearch("cats");
+    this.defaultSearch("dogs");
+    this.defaultSearch("horses");
+  }
+
   render() {
     return (
       <Router>
         <div className="container">
-          <Searchform onSearch={this.search} />
+          <Searchform
+            onSearch={this.search}
+            toggleLoading={this.toggleLoading}
+          />
           <Navigation />
           <Switch>
             <Route
-              path="/"
               exact
+              path="/"
               render={() =>
                 this.state.loading ? (
                   <p>loading</p>
@@ -89,7 +102,7 @@ class App extends Component {
               path="/horse"
               render={props => <Gallery data={this.state.horses} />}
             />
-            <Route Component={<Notfound />} />
+            <Route render={props => <PageNotfound />} />
           </Switch>
         </div>
       </Router>
