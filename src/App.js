@@ -9,8 +9,8 @@ import Apikey from "./config";
 import PageNotfound from "./components/pagenotfound";
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       sunrise: [],
       cats: [],
@@ -73,9 +73,15 @@ class App extends Component {
     return (
       <Router>
         <div className="container">
-          <Searchform
-            onSearch={this.search}
-            toggleLoading={this.toggleLoading}
+          <Route
+            path="/"
+            render={props => (
+              <Searchform
+                {...props}
+                onSearch={this.search}
+                toggleLoading={this.toggleLoading}
+              />
+            )}
           />
           <Navigation />
           <Switch>
@@ -83,6 +89,16 @@ class App extends Component {
               exact
               path="/"
               render={() =>
+                this.state.loading ? (
+                  <p>loading</p>
+                ) : (
+                  <Gallery data={this.state.searchItem} />
+                )
+              }
+            />
+            <Route
+              path="/search/:tag"
+              render={props =>
                 this.state.loading ? (
                   <p>loading</p>
                 ) : (
@@ -102,6 +118,7 @@ class App extends Component {
               path="/horse"
               render={props => <Gallery data={this.state.horses} />}
             />
+
             <Route render={props => <PageNotfound />} />
           </Switch>
         </div>

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
 
 class Searchform extends Component {
-  state = {
-    searchText: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = { searchText: "" };
+  }
 
   onSearchChange = e => {
     this.setState({ searchText: e.target.value });
@@ -13,7 +13,10 @@ class Searchform extends Component {
   handleSummit = e => {
     e.preventDefault();
     this.props.onSearch(this.state.searchText);
-    this.props.history.push("/");
+    let tag = this.tag.value;
+    let path = `/search/${tag}`;
+    this.props.history.push(path);
+
     e.currentTarget.reset();
   };
 
@@ -24,10 +27,11 @@ class Searchform extends Component {
           type="search"
           name="search"
           onChange={this.onSearchChange}
+          placeholder="search..."
+          ref={input => (this.tag = input)}
           required
         />
         <button
-          to="/"
           type="submit"
           className="search-button"
           onClick={this.props.toggleLoading}
@@ -48,4 +52,4 @@ class Searchform extends Component {
   }
 }
 
-export default withRouter(Searchform);
+export default Searchform;
