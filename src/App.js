@@ -6,7 +6,6 @@ import Searchform from './components/searchform';
 import Navigation from './components/nav';
 import Gallery from './components/gallery';
 import PageNotfound from './components/pagenotfound';
-import Apikey from './config';
 
 class App extends Component {
   constructor(props) {
@@ -25,7 +24,7 @@ class App extends Component {
   defaultSearch = (tag) => {
     axios
       .get(
-        `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${Apikey}&tags=${tag}&per_page=24&format=json&nojsoncallback=1`
+        `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${process.env.REACT_APP_FLICKR_API_KEY}&tags=${tag}&per_page=24&format=json&nojsoncallback=1`
       )
       .then((response) => {
         this.setState({
@@ -41,7 +40,7 @@ class App extends Component {
   search = (tag = 'sunrise') => {
     axios
       .get(
-        `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${Apikey}&tags=${tag}&per_page=24&format=json&nojsoncallback=1`
+        `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${process.env.REACT_APP_FLICKR_API_KEY}&tags=${tag}&per_page=24&format=json&nojsoncallback=1`
       )
       .then((response) => {
         this.setState({
