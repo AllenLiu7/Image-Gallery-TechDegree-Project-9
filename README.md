@@ -1,6 +1,7 @@
-This is an image gallery using React and the Flickr API. 
+## React Gallery
+This is an image gallery using React and the Flickr API. User can search images by whatever keyword or click the preset button.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 
